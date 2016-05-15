@@ -59,11 +59,13 @@ continue_stmt: 'continue' | 'continua'
 return_stmt: 'return' [testlist] | 'ritorna' [testlist]
 yield_stmt: yield_expr
 raise_stmt: 'raise' [test ['from' test]]
-import_stmt: import_name | import_from
+import_stmt: import_name | import_from | import_da
 import_name: 'import' dotted_as_names | 'importa' dotted_as_names
 # note below: the ('.' | '...') is necessary because '...' is tokenized as ELLIPSIS
 import_from: ('from' (('.' | '...')* dotted_name | ('.' | '...')+)
               'import' ('*' | '(' import_as_names ')' | import_as_names))
+import_da: ('da' (('.' | '...')* dotted_name | ('.' | '...')+)
+            'importa' ('*' | '(' import_as_names ')' | import_as_names))
 
 import_as_name: NAME ['as' NAME]
 dotted_as_name: dotted_name ['as' NAME]
@@ -76,9 +78,9 @@ assert_stmt: 'assert' test [',' test]
 
 compound_stmt: if_stmt | while_stmt | for_stmt | try_stmt | with_stmt | funcdef | classdef | decorated | async_stmt
 async_stmt: ASYNC (funcdef | with_stmt | for_stmt)
-if_stmt: ('if' | 'se') test ':' suite (('sennò' | 'elif') test ':' suite)* [('else' | 'altrimenti') ':' suite] #| 'se' test ':' suite ('sennò' test ':' suite)* ['altrimenti' ':' suite]
-while_stmt: 'while' test ':' suite ['else' ':' suite] | 'finchè' test ':' suite ['altrimenti' ':' suite]
-for_stmt: 'for' exprlist 'in' testlist ':' suite ['else' ':' suite] | 'per' exprlist 'in' testlist ':' suite ['altrimenti' ':' suite]
+if_stmt: 'if' test ':' suite ('elif' test ':' suite)* ['else' ':' suite]
+while_stmt: 'while' test ':' suite ['else' ':' suite]
+for_stmt: 'for' exprlist 'in' testlist ':' suite ['else' ':' suite]
 try_stmt: ('try' ':' suite
            ((except_clause ':' suite)+
             ['else' ':' suite]
@@ -114,7 +116,7 @@ atom_expr: [AWAIT] atom trailer*
 atom: ('(' [yield_expr|testlist_comp] ')' |
        '[' [testlist_comp] ']' |
        '{' [dictorsetmaker] '}' |
-       NAME | NUMBER | STRING+ | '...' | 'None' | 'True' | 'False' )
+       NAME | NUMBER | STRING+ | '...' | 'None' | 'True' | 'False')
 testlist_comp: (test|star_expr) ( comp_for | (',' (test|star_expr))* [','] )
 trailer: '(' [arglist] ')' | '[' subscriptlist ']' | '.' NAME
 subscriptlist: subscript (',' subscript)* [',']
@@ -146,8 +148,8 @@ argument: ( test [comp_for] |
             '*' test )
 
 comp_iter: comp_for | comp_if
-comp_for: 'for' exprlist 'in' or_test [comp_iter] | 'per' exprlist 'in' or_test [comp_iter]
-comp_if: 'if' test_nocond [comp_iter] | 'se' test_nocond [comp_iter]
+comp_for: 'for' exprlist 'in' or_test [comp_iter]
+comp_if: 'if' test_nocond [comp_iter]
 
 # not used in grammar, but may appear in "node" passed from Parser to Compiler
 encoding_decl: NAME
