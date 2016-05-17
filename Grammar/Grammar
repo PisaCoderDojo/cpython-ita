@@ -56,7 +56,7 @@ pass_stmt: 'pass' | 'salta'
 flow_stmt: break_stmt | continue_stmt | return_stmt | raise_stmt | yield_stmt
 break_stmt: 'break' | 'interrompi'
 continue_stmt: 'continue' | 'continua'
-return_stmt: 'return' [testlist] | 'restituisci' [testlist] | 'ritorna' [testlist]
+return_stmt: 'return' [testlist] | 'restituisci' [testlist]
 yield_stmt: yield_expr
 raise_stmt: 'raise' [test ['from' test]]
 import_stmt: import_name | import_from
