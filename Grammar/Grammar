@@ -24,7 +24,7 @@ decorators: decorator+
 decorated: decorators (classdef | funcdef | async_funcdef)
 
 async_funcdef: ASYNC funcdef
-funcdef: 'def' NAME parameters ['->' test] ':' suite
+funcdef: 'def' NAME parameters ['->' test] ':' suite | 'funzione' NAME parameters ['->' test] ':' suite
 
 parameters: '(' [typedargslist] ')'
 typedargslist: (tfpdef ['=' test] (',' tfpdef ['=' test])* [',' [
@@ -56,7 +56,7 @@ pass_stmt: 'pass' | 'salta'
 flow_stmt: break_stmt | continue_stmt | return_stmt | raise_stmt | yield_stmt
 break_stmt: 'break' | 'interrompi'
 continue_stmt: 'continue' | 'continua'
-return_stmt: 'return' [testlist] | 'ritorna' [testlist]
+return_stmt: 'return' [testlist] | 'restituisci' [testlist] | 'ritorna' [testlist]
 yield_stmt: yield_expr
 raise_stmt: 'raise' [test ['from' test]]
 import_stmt: import_name | import_from
@@ -90,7 +90,9 @@ with_item: test ['as' expr]
 except_clause: 'except' [test ['as' NAME]]
 suite: simple_stmt | NEWLINE INDENT stmt+ DEDENT
 
-test: or_test ['if' or_test 'else' test] | lambdef
+
+
+test: or_test [('if'|'se') or_test ('else'|'altrimenti') test] | lambdef
 test_nocond: or_test | lambdef_nocond
 lambdef: 'lambda' [varargslist] ':' test
 lambdef_nocond: 'lambda' [varargslist] ':' test_nocond
