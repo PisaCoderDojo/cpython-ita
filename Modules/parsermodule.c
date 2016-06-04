@@ -1193,16 +1193,16 @@ validate_if(node *tree)
     int nch = NCH(tree);
     int res = (validate_ntype(tree, if_stmt)
                && (nch >= 4)
-               && validate_name(CHILD(tree, 0), "if")
+               && (validate_name(CHILD(tree, 0), "if") || validate_name(CHILD(tree, 0), "se"))
                && validate_test(CHILD(tree, 1))
                && validate_colon(CHILD(tree, 2))
                && validate_suite(CHILD(tree, 3)));
 
     if (res && ((nch % 4) == 3)) {
         /*  ... 'else' ':' suite  */
-        res = (validate_name(CHILD(tree, nch - 3), "else")
+        res = (validate_name(CHILD(tree, nch - 3), "else") || validate_name(CHILD(tree, nch - 3), "altrimenti"))
                && validate_colon(CHILD(tree, nch - 2))
-               && validate_suite(CHILD(tree, nch - 1)));
+               && validate_suite(CHILD(tree, nch - 1));
         nch -= 3;
     }
     else if (!res && !PyErr_Occurred())
@@ -1214,10 +1214,10 @@ validate_if(node *tree)
         /*  ... ('elif' test ':' suite)+ ...  */
         int j = 4;
         while ((j < nch) && res) {
-            res = (validate_name(CHILD(tree, j), "elif")
+            res = (validate_name(CHILD(tree, j), "elif")  || validate_name(CHILD(tree, j), "sennò"))
                    && validate_colon(CHILD(tree, j + 2))
                    && validate_test(CHILD(tree, j + 1))
-                   && validate_suite(CHILD(tree, j + 3)));
+                   && validate_suite(CHILD(tree, j + 3));
             j += 4;
         }
     }

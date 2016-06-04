@@ -2,15 +2,17 @@ importa random
 
 funzione test():
     print ("yes")
-    ritorna 5
+    restituisci 5
 
 print(test())
 per i in range(0, 10):
     numero = random.randrange(0, 10)
     print(numero)
-    se True:
+    se False:
         salta
-    elif False:
+    sennò True:
+        salta
+    altrimenti:
         salta
 altrimenti:
     print ('END')
