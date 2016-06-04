@@ -1153,12 +1153,12 @@ ast_for_comp_op(struct compiling *c, const node *n)
         }
     }
     else if (NCH(n) == 2) {
-        /* handle "not in" and "is not" */
+        /* handle "not in"|"non in" and "is not"|"non è" */
         switch (TYPE(CHILD(n, 0))) {
             case NAME:
                 if (strcmp(STR(CHILD(n, 1)), "in") == 0)
                     return NotIn;
-                if (strcmp(STR(CHILD(n, 0)), "is") == 0)
+                if (strcmp(STR(CHILD(n, 0)), "is") == 0 ||  strcmp(STR(CHILD(n, 1)), "è") == 0)
                     return IsNot;
             default:
                 PyErr_Format(PyExc_SystemError, "invalid comp_op: %s %s",
@@ -2054,11 +2054,11 @@ ast_for_atom(struct compiling *c, const node *n)
         const char *s = STR(ch);
         size_t len = strlen(s);
         if (len >= 4 && len <= 5) {
-            if (!strcmp(s, "None"))
+            if (!strcmp(s, "None") || !strcmp(s, "Nulla"))
                 return NameConstant(Py_None, LINENO(n), n->n_col_offset, c->c_arena);
-            if (!strcmp(s, "True"))
+            if (!strcmp(s, "True") || !strcmp(s, "Vero"))
                 return NameConstant(Py_True, LINENO(n), n->n_col_offset, c->c_arena);
-            if (!strcmp(s, "False"))
+            if (!strcmp(s, "False") || !strcmp(s, "Falso"))
                 return NameConstant(Py_False, LINENO(n), n->n_col_offset, c->c_arena);
         }
         name = new_identifier(s, c);

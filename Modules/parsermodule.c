@@ -2278,7 +2278,8 @@ validate_comp_op(node *tree)
               break;
           case NAME:
               res = ((strcmp(STR(tree), "in") == 0)
-                     || (strcmp(STR(tree), "is") == 0));
+                     || (strcmp(STR(tree), "is") == 0)
+                     || (strcmp(STR(tree), "è") == 0));
               if (!res) {
                   PyErr_Format(parser_error,
                                "illegal operator '%s'", STR(tree));
@@ -2292,10 +2293,11 @@ validate_comp_op(node *tree)
     else if ((res = validate_numnodes(tree, 2, "comp_op")) != 0) {
         res = (validate_ntype(CHILD(tree, 0), NAME)
                && validate_ntype(CHILD(tree, 1), NAME)
-               && (((strcmp(STR(CHILD(tree, 0)), "is") == 0)
-                    && (strcmp(STR(CHILD(tree, 1)), "not") == 0))
-                   || ((strcmp(STR(CHILD(tree, 0)), "not") == 0)
-                       && (strcmp(STR(CHILD(tree, 1)), "in") == 0))));
+               && ( ((strcmp(STR(CHILD(tree, 0)), "is") == 0) && (strcmp(STR(CHILD(tree, 1)), "not") == 0))
+                    || ((strcmp(STR(CHILD(tree, 0)), "non") == 0) && (strcmp(STR(CHILD(tree, 1)), "è") == 0))
+
+                    || ((strcmp(STR(CHILD(tree, 0)), "not") == 0) && (strcmp(STR(CHILD(tree, 1)), "in") == 0))
+                    || ((strcmp(STR(CHILD(tree, 0)), "non") == 0) && (strcmp(STR(CHILD(tree, 1)), "in") == 0))));
         if (!res && !PyErr_Occurred())
             err_string("unknown comparison operator");
     }
