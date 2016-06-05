@@ -274,9 +274,9 @@ class EditorWindow(object):
         # conceivable file).
         # Making the initial values larger slows things down more often.
         self.num_context_lines = 50, 500, 5000000
-        self.per = per = self.Percolator(text)
+        self.perAAAAA = perAAAAA = self.Percolator(text)
         self.undo = undo = self.UndoDelegator()
-        per.insertfilter(undo)
+        perAAAAA.insertfilter(undo)
         text.undo_block_start = undo.undo_block_start
         text.undo_block_stop = undo.undo_block_stop
         undo.set_saved_change_hook(self.saved_change_hook)
@@ -726,15 +726,15 @@ class EditorWindow(object):
             self.color = self.ColorDelegator()
         # can add more colorizers here...
         if self.color:
-            self.per.removefilter(self.undo)
-            self.per.insertfilter(self.color)
-            self.per.insertfilter(self.undo)
+            self.perAAAAA.removefilter(self.undo)
+            self.perAAAAA.insertfilter(self.color)
+            self.perAAAAA.insertfilter(self.undo)
 
     def _rmcolorizer(self):
         if not self.color:
             return
         self.color.removecolors()
-        self.per.removefilter(self.color)
+        self.perAAAAA.removefilter(self.color)
         self.color = None
 
     def ResetColorizer(self):
@@ -1016,8 +1016,8 @@ class EditorWindow(object):
             self.color = None
         self.text = None
         self.tkinter_vars = None
-        self.per.close()
-        self.per = None
+        self.perAAAAA.close()
+        self.perAAAAA = None
         self.top.destroy()
         if self.close_hook:
             # unless override: unregister from flist, terminate if last window

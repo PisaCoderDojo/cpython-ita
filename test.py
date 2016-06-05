@@ -8,6 +8,7 @@ da random importa randrange come b
 # print ('ciao' in ['ciao'])
 # print ('ciao' non in ['ciao'])
 
+
 funzione test():
     print ("yes")
     restituisci 5
@@ -25,7 +26,7 @@ per i in range(0, 10):
 altrimenti:
     print ('END')
 
-finchè Vero:
+mentre Vero:
     print ('while')
     interrompi
 altrimenti:

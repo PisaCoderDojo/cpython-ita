@@ -77,7 +77,7 @@ assert_stmt: 'assert' test [',' test]
 compound_stmt: if_stmt | while_stmt | for_stmt | try_stmt | with_stmt | funcdef | classdef | decorated | async_stmt
 async_stmt: ASYNC (funcdef | with_stmt | for_stmt)
 if_stmt: ('if' | 'se') test ':' suite (('sennò' | 'elif') test ':' suite)* [('else' | 'altrimenti') ':' suite] #| 'se' test ':' suite ('sennò' test ':' suite)* ['altrimenti' ':' suite]
-while_stmt: 'while' test ':' suite ['else' ':' suite] | 'finchè' test ':' suite ['altrimenti' ':' suite]
+while_stmt: ('while'|'mentre') test ':' suite [('else' | 'altrimenti') ':' suite]
 for_stmt: 'for' exprlist 'in' testlist ':' suite ['else' ':' suite] | 'per' exprlist 'in' testlist ':' suite ['altrimenti' ':' suite]
 try_stmt: ('try' ':' suite
            ((except_clause ':' suite)+
