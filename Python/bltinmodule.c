@@ -1706,7 +1706,6 @@ builtin_pow_impl(PyModuleDef *module, PyObject *x, PyObject *y, PyObject *z)
     return PyNumber_Power(x, y, z);
 }
 
-
 /* AC: cannot convert yet, waiting for *args support */
 static PyObject *
 builtin_print(PyObject *self, PyObject *args, PyObject *kwds)
@@ -2619,6 +2618,7 @@ static PyMethodDef builtin_methods[] = {
     BUILTIN_ORD_METHODDEF
     BUILTIN_POW_METHODDEF
     {"print",           (PyCFunction)builtin_print,      METH_VARARGS | METH_KEYWORDS, print_doc},
+    {"stampa",           (PyCFunction)builtin_print,      METH_VARARGS | METH_KEYWORDS, print_doc},
     BUILTIN_REPR_METHODDEF
     {"round",           (PyCFunction)builtin_round,      METH_VARARGS | METH_KEYWORDS, round_doc},
     BUILTIN_SETATTR_METHODDEF
@@ -2700,6 +2700,7 @@ _PyBuiltin_Init(void)
     SETBUILTIN("map",                   &PyMap_Type);
     SETBUILTIN("object",                &PyBaseObject_Type);
     SETBUILTIN("range",                 &PyRange_Type);
+    SETBUILTIN("intervallo",                 &PyRange_Type);
     SETBUILTIN("reversed",              &PyReversed_Type);
     SETBUILTIN("set",                   &PySet_Type);
     SETBUILTIN("slice",                 &PySlice_Type);

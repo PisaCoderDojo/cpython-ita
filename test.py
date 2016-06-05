@@ -10,24 +10,24 @@ da random importa randrange come b
 
 
 funzione test():
-    print ("yes")
+    stampa ("yes")
     restituisci 5
 
 print(test())
-per i in range(0, 10):
+per i in intervallo(0, 10):
     numero = random.randrange(0, 10)
-    print(numero)
+    stampa(numero)
     se Vero:
-        print('è vero..')
+        stampa('è vero..')
     sennò Falso:
         salta
     altrimenti:
         salta
 altrimenti:
-    print ('END')
+    stampa ('END')
 
 mentre Vero:
-    print ('while')
+    stampa ('while')
     interrompi
 altrimenti:
-    print ('END')
+    stampa ('END')
