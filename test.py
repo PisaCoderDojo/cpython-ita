@@ -13,7 +13,8 @@ funzione test():
     stampa ("yes")
     restituisci 5
 
-print(test())
+stampa(test())
+
 per i in intervallo(0, 10):
     numero = random.randrange(0, 10)
     stampa(numero)
@@ -27,7 +28,7 @@ altrimenti:
     stampa ('END')
 
 mentre Vero:
-    stampa ('while')
+    stampa ('while'
     interrompi
 altrimenti:
     stampa ('END')
