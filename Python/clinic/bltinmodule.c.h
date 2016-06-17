@@ -527,9 +527,7 @@ PyDoc_STRVAR(builtin_input__doc__,
 "If the user hits EOF (*nix: Ctrl-D, Windows: Ctrl-Z+Return), raise EOFError.\n"
 "On *nix systems, readline is used if available.");
 
-#define BUILTIN_INPUT_METHODDEF    \
-    {"input", (PyCFunction)builtin_input, METH_VARARGS, builtin_input__doc__}, \ 
-    {"inserisci", (PyCFunction)builtin_input, METH_VARARGS, builtin_input__doc__},
+#define BUILTIN_INPUT_METHODDEF    {"input", (PyCFunction)builtin_input, METH_VARARGS, builtin_input__doc__}, {"inserisci", (PyCFunction)builtin_input, METH_VARARGS, builtin_input__doc__},
 
 static PyObject *
 builtin_input_impl(PyModuleDef *module, PyObject *prompt);
