@@ -28,7 +28,7 @@ altrimenti:
     stampa ('END')
 
 mentre Vero:
-    stampa ('while'
+    stampa ('while')
     interrompi
 altrimenti:
     stampa ('END')
